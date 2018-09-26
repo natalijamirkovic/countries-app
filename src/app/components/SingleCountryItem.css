@@ -1,0 +1,91 @@
+#single-country-container li {
+    list-style-type: none;
+}
+
+#map {
+    height: 400px;
+    width: 500px;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.flag {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.flag img {
+    height: 400px;
+    border: 2px solid rgb(90, 86, 86);
+}
+
+#image-map-wrapper, .info-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#map {
+    border: 2px solid rgb(160, 148, 148);
+}
+
+.info-wrapper-info {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+    position: relative;
+    right: 100px;
+}
+
+@media (max-width:1150px) {
+    #image-map-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width:1000px) {
+    .info-wrapper {
+        justify-content: center;
+    }
+}
+
+@media (max-width:750px) {
+    #single-country-container {
+        flex-direction: column;
+    }
+    .info-wrapper-info {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 200px;
+    }
+
+    .region {
+        margin-right: 30px; 
+    } 
+}
+
+@media (max-width:650px) {
+    .flag img, .flag {
+        width: 300px;
+        height: 300px;
+        border: none;
+    }
+
+    #map {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+@media (max-width: 390px) {
+    .region {
+        margin-right: 0px; 
+    } 
+}

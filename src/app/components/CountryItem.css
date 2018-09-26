@@ -1,0 +1,17 @@
+.country-item {
+    height: 400px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.country-item div img {
+    width: 100%;
+    height: 250px;
+}
+
+.country-item p {
+    margin-top: 15px;
+}

@@ -1,0 +1,29 @@
+#all-countries-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    overflow: auto;
+    resize: horizontal;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+    text-align: center;
+    margin-top: 20px;
+    list-style: none;
+    margin: 40px 20px;
+}
+
+#all-countries-list li {
+    border: 1px solid #448AFF;
+    border-radius: 20px;
+}
+
+#all-countries-list li a {
+    text-decoration: none;
+    font-size:20px;
+}
+
+@media (max-width:400px) {
+    #all-countries-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    }
+}
+ 
