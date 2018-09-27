@@ -10,5 +10,8 @@ main {
 
 ol {
   text-align: center;
+}
 
+.green {
+  color: green;
 }

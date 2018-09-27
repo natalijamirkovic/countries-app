@@ -5,21 +5,17 @@ import Answer from './Answer';
 
 const QuestionItem = (props) => {
 
-    const { id, question, correctAnswer, incorrectAnswers, handleClickedAnswer } = props.q;
-    // console.log(props);
+    const { id, question, correctAnswer, incorrectAnswers } = props.q;
     
-
     let displayWrong = incorrectAnswers.map((a, i) => {
-        // console.log(a);
-
-        return <Answer wrong={a} answer={correctAnswer} id={id} key={i} handleClickedAnswer={props.handleClickedAnswer} />
-    })
+        return <Answer wrong={a} answer={correctAnswer} id={id} key={i} handleClickedAnswer={props.handleClickedAnswer} finish={props.finish} />
+    });
 
     return (
         <li>
             <h4> {question} </h4>
             {displayWrong}
-            <Answer correct={correctAnswer} id={id} handleClickedAnswer={props.handleClickedAnswer} />
+            <Answer correct={correctAnswer} id={id} handleClickedAnswer={props.handleClickedAnswer} finish={props.finish}/>
         </li>
     )
 }
