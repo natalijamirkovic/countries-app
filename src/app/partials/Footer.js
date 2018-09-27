@@ -5,7 +5,7 @@ const Footer = (props) => {
     return (
         <footer>
             <div>
-            {new Date().getFullYear()} Copyright &#169; Kristina i Natalija
+            {new Date().getFullYear()} Copyright &#169; Natalija Mirkovic
             </div>
         </footer>
     );

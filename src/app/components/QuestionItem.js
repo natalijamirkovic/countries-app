@@ -1,63 +1,35 @@
-import React, { Component } from 'react';
-import "./QuestionItem.css"
+import React from 'react';
+import "./QuestionItem.css";
+import Answer from './Answer';
 
 
-class QuestionItem extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            correctAnswer: false,
-            incorrectAnswer: false
-        }
+const QuestionItem = (props) => {
 
-        this.mapIncorrectAnswers = this.mapIncorrectAnswers.bind(this);
-        this.handleAnswer = this.handleAnswer.bind(this);
-    }
+    const { id, question, correctAnswer, incorrectAnswers, handleClickedAnswer } = props.q;
+    // console.log(props);
+    
 
-    handleAnswer(e) {
-        if (e.target.value === "incorrectAnswer") {
-            this.setState({
-                [e.target.value]: true,
-                correctAnswer: false
-            });
-        };
+    let displayWrong = incorrectAnswers.map((a, i) => {
+        // console.log(a);
 
-        if (e.target.value === "correctAnswer") {
-            this.setState({
-                [e.target.value]: true,
-                incorrectAnswer: false
-            });
-        };
+        return <Answer wrong={a} answer={correctAnswer} id={id} key={i} handleClickedAnswer={props.handleClickedAnswer} />
+    })
 
-    }
-
-    mapIncorrectAnswers(answers) {
-        return answers.map((a) => {
-            return <li key={a} className={this.props.finish ? "red" : ""}>
-                <input type="radio" name="question" value="incorrectAnswer" onClick={this.handleAnswer}  />{a}
-            </li>
-        })
-    }
-
-    render() {
-        const { question, correctAnswer, incorrectAnswers } = this.props.q;
-        return (
-            <li>
-                <h2>{question}</h2>
-                <form>
-                    <div className={this.props.finish ? "green" : ""} >
-                    <input type="radio" name="question" value="correctAnswer" onClick={this.handleAnswer} required/> {correctAnswer} 
-                    </div>
-                    <ul>
-                        {this.mapIncorrectAnswers(incorrectAnswers)}
-                    </ul>
-                </form>
-                <div>
-                    {/* {this.props.finish ? "Correct answer is:" + correctAnswer : ""} */}
-                </div>
-            </li>
-        );
-    }
-};
+    return (
+        <li>
+            <h4> {question} </h4>
+            {displayWrong}
+            <Answer correct={correctAnswer} id={id} handleClickedAnswer={props.handleClickedAnswer} />
+        </li>
+    )
+}
 
 export default QuestionItem;
+
+
+
+{/* <li>
+    <h4> {question} </h4>                                   pitanje
+    {displayWrong}                                          var u koju smo smjestili tri netacna odgovora koja smo mapirali i kroz propse proslijedili netacan odg. kroz props (wrong=a) kao i tacan (answer = {correctAnswer})
+    <Answer correct={correctAnswer} id={id} />  proslijedili tacan odg (correct={correctAnswer})
+</li> */}

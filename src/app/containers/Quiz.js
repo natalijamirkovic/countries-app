@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { questionService } from '../../services/questionService';
 import QuestionItem from '../components/QuestionItem';
+import "./Quiz.css";
 
 class Quiz extends Component {
     constructor(props) {
         super(props)
         this.state = {
             questions: [],
+            answers: [],
             errorMessage: "",
             finish: false,
             answerCounter: 0
         }
         this.renderQuestions = this.renderQuestions.bind(this);
         this.handleQuizSubmission = this.handleQuizSubmission.bind(this);
+        this.handleClickedAnswer = this.handleClickedAnswer.bind(this);
     }
+
 
 
     componentDidMount() {
@@ -36,15 +40,9 @@ class Quiz extends Component {
             return <div>Loading Quiz</div>
         }
         return questions.map((q, i) => {
-            return <QuestionItem key={i} q={q} finish={finish} handleQuizSubmission={this.handleQuizSubmission} />
+            return <QuestionItem key={i} q={q} finish={finish} handleClickedAnswer={this.handleClickedAnswer}/>
         })
     }
-
-    // incrementAnswerCounter() {
-    //     this.setState(prevState => ({
-    //         answerCounter: prevState.answerCounter + 1
-    //     }))
-    // }
 
     handleQuizSubmission(e) {
         console.log(e);
@@ -53,11 +51,44 @@ class Quiz extends Component {
         this.setState({
             finish: true
         })
-
     }
+
+    handleClickedAnswer(e, correct, id) {
+        let myAnswer = {}
+        console.log(e.target.value);
+        console.log(correct);
+        let {answers} = this.state;
+        
+        if(e.target.value == correct) {
+            myAnswer = {
+                id,
+                answer: true
+            }
+            answers.push(myAnswer) ;
+            this.setState({
+                answers
+            });
+           
+        }
+
+        if(e.target.value !== correct) {
+            myAnswer = {
+                id,
+                answer: false
+            }
+            answers.push(myAnswer) ;
+            this.setState({
+                answers
+            });
+           
+        }
+    }
+
+
+
     render() {
         return (
-            <div>
+            <div id="quiz-container">
                 <div>
                     {this.state.errorMessage !== "" ? "Couldn't load countries" : ""}
                 </div>
