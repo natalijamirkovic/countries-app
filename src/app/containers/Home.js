@@ -152,9 +152,11 @@ class Home extends Component {
                     <p>{regionOptions ? "Search by region: Africa, Americas, Asia, Europe, Oceania" : ""}</p>
                     <p className={selectError ? "error-red" : ""}>{selectError ? "*Please select type of search" : ""}</p>
                 </form>
-                <ul id="all-countries-list">
-                    {!results ? "" : this.renderResults(results)}
-                </ul>
+                <div id="bg-img">
+                    <ul id="all-countries-list">
+                        {!results ? "" : this.renderResults(results)}
+                    </ul>
+                </div>
                 <div>
                     {this.state.errorMessage !== "" ? "No results" : ""}
                 </div>

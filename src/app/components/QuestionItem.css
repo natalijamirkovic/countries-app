@@ -5,3 +5,12 @@
 .red {
     color: tomato;
 }
+
+.question-li {
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom:11px;
+    font-size: 20px;
+}

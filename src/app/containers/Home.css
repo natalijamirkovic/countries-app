@@ -1,8 +1,17 @@
 .home-container {
     text-align: center;
     margin-top: 30px;
+    /* background-image: url("../../images/cudna.png"); */
+    min-height: 500px;
+   
 }
 
+#bg-img {
+    background-image: url("../../images/cudna.png");
+    min-height: 60vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .home-container form {
     font-size: 21px;
 }

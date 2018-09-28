@@ -12,16 +12,21 @@ class Quiz extends Component {
             errorMessage: "",
             finish: false,
             answerCounter: 0,
-            required: false, 
-            red: false
+            required: false,
         }
 
+        this.loadQuestions = this.loadQuestions.bind(this);
         this.renderQuestions = this.renderQuestions.bind(this);
         this.handleQuizSubmission = this.handleQuizSubmission.bind(this);
         this.handleClickedAnswer = this.handleClickedAnswer.bind(this);
+        this.handleReload = this.handleReload.bind(this);
     }
 
     componentDidMount() {
+        this.loadQuestions();
+    }
+
+    loadQuestions() {
         questionService.fetchEasyQuiz()
             .then(res => {
                 this.setState({
@@ -36,25 +41,24 @@ class Quiz extends Component {
     }
 
     renderQuestions() {
-        const { questions, finish } = this.state;
+        const { questions, finish, answers } = this.state;
         if (!questions) {
             return <div>Loading Quiz</div>
         }
         return questions.map((q, i) => {
-            return <QuestionItem key={i} q={q} finish={finish} handleClickedAnswer={this.handleClickedAnswer} />
+            return <QuestionItem key={i} q={q} finish={finish} handleClickedAnswer={this.handleClickedAnswer} answers={answers} />
         })
     }
 
-
     handleClickedAnswer(e, correct, id) {
-
-        let myAnswer = {}
+        let myAnswer = {};
         let { answers } = this.state;
 
-        if (e.target.value == correct) {
+        if (e.target.value === correct) {
             myAnswer = {
                 id,
-                answer: true
+                answer: true,
+                clickedResponse: e.target.value
             };
 
             answers.splice(id, 1, myAnswer);
@@ -66,7 +70,8 @@ class Quiz extends Component {
         if (e.target.value !== correct) {
             myAnswer = {
                 id,
-                answer: false
+                answer: false,
+                clickedResponse: e.target.value
             }
             answers.splice(id, 1, myAnswer);
             this.setState({
@@ -101,16 +106,22 @@ class Quiz extends Component {
         });
     }
 
+    handleReload() {
+        window.location.reload();
+        this.loadQuestions()
+    }
+
     render() {
         return (
             <div id="quiz-container">
                 <div>
                     {this.state.errorMessage !== "" ? "Couldn't load countries" : ""}
                 </div>
-                <ol>
+                <ol id="questions-list">
                     {this.renderQuestions()}
                 </ol>
-                <input type="button" value="Submit answers" onClick={this.handleQuizSubmission} required />
+                <input type="button" value="Submit answers" onClick={this.handleQuizSubmission}/>
+                <input type="button" value="Reload questions" onClick={this.handleReload} />
                 <p>{this.state.required === true ? "You must answer all questions" : ""} </p>
                 <p>{this.state.finish === true ? this.state.finalScore + "/20" : ""} </p>
             </div>
