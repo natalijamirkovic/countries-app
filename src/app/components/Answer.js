@@ -37,7 +37,7 @@ const Answer = (props) => {
     }
 
     return (
-        <div className={finish === true ? colorAnswers() : ""} className="answer-li">
+        <div className={finish === true ? colorAnswers() : ""} >
             <input type="radio" name={props.id} value={displayAnswers()} onClick={(e) => handleClickedAnswer(e, rightAnswer, id)} className="bla" />
             {displayAnswers()}
         </div>
